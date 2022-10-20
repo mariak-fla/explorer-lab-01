@@ -8,7 +8,10 @@ const ccLogo = document.querySelector(".cc-logo span:nth-child(2) img")
 function setCardType(type) {
   const colors = {
     visa: ["#436D99", "#2D57F2"],
-    mastercard: ["#DF6F29", "#C69347"],
+    mastercard: ["#DF6F29", "#F42F2F"],
+    elo: ["#FFC632", "#00A4E0"],
+    americanexpress: ["#0077A6", "#43C4F8"],
+    maestro: ["#43C4F8", "#F42F2F"],
     default: ["#ffc7c7", "#ff9999"],
   }
 
@@ -60,7 +63,7 @@ const cardNumberPattern = {
     {
       mask: "0000 0000 0000 00000",
       regex: /^3[47]\d{0,13}/,
-      cardtype: "american express",
+      cardtype: "americanexpress",
     },
     {
       mask: "0000 0000 0000 0000",
