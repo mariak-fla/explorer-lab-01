@@ -1,8 +1,8 @@
 <h1 align="center"> Explorer Lab #01 </h1>
 
->PT-BR <br>
+>PT-BR
 Site criado durante o evento [Explorer Lab](https://app.rocketseat.com.br/event/explorer-lab/explorer/), promovido pela [Rocketseat](https://app.rocketseat.com.br/).
->EN-US <br>
+>EN-US
 Website created during [Rocketseat](https://app.rocketseat.com.br/)'s [Explorer Lab](https://app.rocketseat.com.br/event/explorer-lab/explorer/) event.
 
 <p align="center">
