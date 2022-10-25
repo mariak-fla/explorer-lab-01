@@ -1,9 +1,13 @@
 import "./css/index.css"
 import IMask from "imask"
+import Swal from "sweetalert2"
 
 const ccBgColor01 = document.querySelector(".cc-bg svg > g g:nth-child(1) path")
 const ccBgColor02 = document.querySelector(".cc-bg svg > g g:nth-child(2) path")
 const ccLogo = document.querySelector(".cc-logo span:nth-child(2) img")
+
+// inputs
+const cardHolder = document.getElementById("card-holder") // nome da pessoa
 
 function setCardType(type) {
   const colors = {
@@ -21,10 +25,9 @@ function setCardType(type) {
 }
 
 globalThis.setCardType = setCardType
-
 const securityCode = document.getElementById("security-code")
 const securityCodePattern = {
-  mask: "0000"
+  mask: "0000",
 }
 const securityCodeMasked = IMask(securityCode, securityCodePattern)
 
@@ -42,7 +45,7 @@ const expirationDatePattern = {
       mask: IMask.MaskedRange,
       from: String(new Date().getFullYear()).slice(2),
       to: String(new Date().getFullYear() + 10).slice(2),
-    }
+    },
   },
 }
 const expirationDateMasked = IMask(expirationDate, expirationDatePattern)
@@ -92,16 +95,37 @@ const cardNumberPattern = {
 }
 const cardNumberMasked = IMask(cardNumber, cardNumberPattern)
 
+function ChamaAlert(status) {
+  if (status === "sucesso") {
+    return Swal.fire("seu Cartão foi adicionado!", "", "success")
+  }
+  Swal.fire("preencha todas as informações primeiro", "", "error")
+}
+
 const addButton = document.getElementById("add-card")
 addButton.addEventListener("click", () => {
-  alert("Cartão adicionado!")
+  if (cardNumberMasked.value <= 0 || cardNumberMasked.value === "") {
+    return ChamaAlert()
+  }
+
+  if (cardHolder.value <= 0) {
+    return ChamaAlert()
+  }
+
+  if (expirationDateMasked.value <= 0) {
+    return ChamaAlert()
+  }
+
+  if (securityCode.value <= 0) {
+    return ChamaAlert()
+  }
+  ChamaAlert("sucesso")
 })
 
 document.querySelector("form").addEventListener("submit", (event) => {
   event.preventDefault()
 })
 
-const cardHolder = document.getElementById("card-holder")
 cardHolder.addEventListener("input", () => {
   const ccHolder = document.querySelector(".cc-holder .value")
 
@@ -112,7 +136,7 @@ cardHolder.addEventListener("input", () => {
 securityCodeMasked.on("accept", () => {
   updateSecurityCode(securityCodeMasked.value)
 })
-function updateSecurityCode(code){
+function updateSecurityCode(code) {
   const ccSecurity = document.querySelector(".cc-security .value")
 
   ccSecurity.innerText = code.length === 0 ? "123" : code
@@ -123,7 +147,7 @@ cardNumberMasked.on("accept", () => {
   setCardType(cardType)
   updateCardNumber(cardNumberMasked.value)
 })
-function updateCardNumber(number){
+function updateCardNumber(number) {
   const ccNumber = document.querySelector(".cc-number")
 
   ccNumber.innerText = number.length === 0 ? "1234 5678 9012 3456" : number
@@ -132,7 +156,7 @@ function updateCardNumber(number){
 expirationDateMasked.on("accept", () => {
   updateExpirationDate(expirationDateMasked.value)
 })
-function updateExpirationDate(date){
+function updateExpirationDate(date) {
   const ccExpiration = document.querySelector(".cc-extra .value")
 
   ccExpiration.innerText = date.length === 0 ? "02/32" : date
