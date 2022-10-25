@@ -97,7 +97,7 @@ const cardNumberMasked = IMask(cardNumber, cardNumberPattern)
 
 function ChamaAlert(status) {
   if (status === "sucesso") {
-    return Swal.fire("seu Cartão foi adicionado!", "", "success")
+    return Swal.fire("Seu cartão foi adicionado!", "", "success")
   }
   Swal.fire("preencha todas as informações primeiro", "", "error")
 }
